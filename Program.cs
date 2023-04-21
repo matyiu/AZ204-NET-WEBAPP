@@ -1,4 +1,15 @@
+using webapp.DB;
+using webapp.Repositories;
+using webapp.Services;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
+builder.Services.AddSingleton<IDBConnection, DBConnection>();
+builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
+builder.Services.AddTransient<IProductService, ProductService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

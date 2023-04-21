@@ -5,5 +5,24 @@
 }
 
 <div class="text-center">
-    <h1>Web App</h1>
+    <h1>Web App: Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <th>@product.ID</th>
+                    <th>@product.Name</th>
+                    <th>@product.Quantity</th>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
