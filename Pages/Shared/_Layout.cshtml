@@ -22,9 +22,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/CPULoad">CPU Autoscale load</a>
-                        </li>
+                        <feature name="CPULoad" requirement="All">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/CPULoad">CPU Autoscale load</a>
+                            </li>
+                        </feature>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>

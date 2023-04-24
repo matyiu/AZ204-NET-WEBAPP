@@ -1,24 +1,50 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.FeatureManagement;
 
 namespace AZ_204_WindowsWebApp.Pages
 {
     public class CPULoadModel: PageModel
     {
+        private readonly IFeatureManager _featureManager;
+
         public long counter = 0;
         public long elapsedMs;
 
-        public void OnGet()
+        public bool isCpuLoadEnabled;
+
+        public CPULoadModel(IFeatureManager featureManager)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+            _featureManager = featureManager;
+        }
 
-            while (counter < 1000000000000000)
+        public async Task<bool> IsCpuLoadEnabled()
+        {
+            if (await _featureManager.IsEnabledAsync("CPULoad"))
             {
-                counter = counter + 1;
+                return true;
+            } else
+            {
+                return false;
             }
+        }
 
-            watch.Stop();
-            elapsedMs = watch.ElapsedMilliseconds;
+        public async Task OnGet()
+        {
+            if (await _featureManager.IsEnabledAsync("CPULoad"))
+            {
+                isCpuLoadEnabled = this.IsCpuLoadEnabled().Result;
+
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                while (counter < 1000000000000000)
+                {
+                    counter = counter + 1;
+                }
+
+                watch.Stop();
+                elapsedMs = watch.ElapsedMilliseconds;
+            }
         }
     }
 }
