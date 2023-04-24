@@ -51,7 +51,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'rjeffvalle-webapp'
+          app-name: 'rjeffvalle-az'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D2C537808F6B4974AF6E02582F9DF009 }}
           package: .
