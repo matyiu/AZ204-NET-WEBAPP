@@ -11,8 +11,6 @@ namespace webapp
         {
             var builder = new ConfigurationBuilder();
 
-            builder.AddJsonFile("appsettings.json", false, true);
-
             Configuration = builder.Build();
         }
 
