@@ -20,32 +20,36 @@ namespace webapp.Repositories
 
         public List<Product> GetAll()
         {
-            List<Product> products = new List<Product>();
+            try {
+                List<Product> products = new List<Product>();
 
-            string statement = "SELECT ProductID, ProductName, Quantity from Products";
+                string statement = "SELECT ProductID, ProductName, Quantity from Products";
 
-            _connection.Open();
+                _connection.Open();
 
-            SqlCommand command = new SqlCommand(statement, _connection);
+                SqlCommand command = new SqlCommand(statement, _connection);
 
-            using (SqlDataReader _reader = command.ExecuteReader())
-            {
-                while (_reader.Read())
+                using (SqlDataReader _reader = command.ExecuteReader())
                 {
-                    Product _product = new Product()
+                    while (_reader.Read())
                     {
-                        ID = _reader.GetInt32(0),
-                        Name = _reader.GetString(1),
-                        Quantity = _reader.GetInt32(2)
-                    };
+                        Product _product = new Product()
+                        {
+                            ID = _reader.GetInt32(0),
+                            Name = _reader.GetString(1),
+                            Quantity = _reader.GetInt32(2)
+                        };
 
-                    products.Add(_product);
+                        products.Add(_product);
+                    }
                 }
+
+                _connection.Close();
+
+                return products;
+            } finally {
+                _connection.Close();
             }
-
-            _connection.Close();
-
-            return products;
         }
     }
 }
