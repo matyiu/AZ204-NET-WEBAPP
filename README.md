@@ -10,3 +10,6 @@ The list of steps I followed to practice this parts where:
 5. Use DI to get the Azure connection string introduced into the App Service configuration
 6. Test with a manual deploy first
 7. Set automatic deploy in the configuration tab of the App Service and use this specific Github repository
+
+## IaC
+Bicep repo to set up the whole [infrastructure](https://github.com/matyiu/azure-iac-resouces)
